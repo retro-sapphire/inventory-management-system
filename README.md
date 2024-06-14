@@ -11,7 +11,7 @@ Now do this before running the program:
 
 0. Clone this GIT Repository
 ```bash
-git clone https://github.com/grobo021/[REPO_NAME]
+git clone https://github.com/grobo021/holiday-homework
 ```
 
 1. Create a .venv environment
