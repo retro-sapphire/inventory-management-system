@@ -1,11 +1,31 @@
-create database test_db;
-use test_db;
+CREATE DATABASE inventory_system;
+USE inventory_system;
 
-create table test_table(
-    ID int,
-    Name varchar(255)
+-- create
+CREATE TABLE INVENTORY (
+  itemId INT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price INT NOT NULL,
+  quantity INT NOT NULL
 );
 
-insert into test_table values("1", "Rishab");
-insert into test_table values("2", "Tejas");
-insert into test_table values("3", "Vedaant");
+CREATE TABLE ORDERS (
+  orderId INT PRIMARY KEY,
+  time DATETIME(0) NOT NULL,
+  shipping_address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ORDER_PRODUCTS (
+  orderId INT NOT NULL,
+  itemId INT NOT NULL,
+  quantity INT NOT NULL,
+  FOREIGN KEY (orderId) REFERENCES ORDERS(orderId),
+  FOREIGN KEY (itemId) REFERENCES INVENTORY(itemId)
+);
+
+-- insert
+INSERT INTO INVENTORY VALUES (01, 'Apples', 10, 300);
+INSERT INTO INVENTORY VALUES (02, 'Bananas', 20, 90);
+INSERT INTO INVENTORY VALUES (03, 'Oranges', 15, 200);
+INSERT INTO INVENTORY VALUES (04, 'Melons', 30, 70);
+INSERT INTO INVENTORY VALUES (05, 'Lemons', 50, 20);
