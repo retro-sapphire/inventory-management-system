@@ -50,8 +50,6 @@ A `init.exe` will be made in `dist` folder. Execute it to run the program.
 # Setup for the sample database
 Open the mysql command line and run the following command to quickly set up a sample database.
 
-It will make a new database `test_db` with a table `test_table`
-
 ```sql
 source sample_db.sql
 ```
