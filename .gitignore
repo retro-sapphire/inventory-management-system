@@ -3,3 +3,4 @@
 build
 dist
 init.spec
+__pycache__
