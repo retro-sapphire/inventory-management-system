@@ -1,6 +1,6 @@
 # Python Libraries
 import customtkinter as ctk
-import pymysql as pym
+import mysql.connector as con
 from dotenv import load_dotenv
 import os
 
@@ -12,17 +12,17 @@ from modules.settings import SettingsFrame
 
 load_dotenv(override=True) 
 
-db_con = pym.connect(
+cnx = con.connect(
     host=os.getenv("DB_DOMAIN"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASS"),
     db=os.getenv("DB_NAME")
 )
-cursor = db_con.cursor()
+cur = cnx.cursor()
 
 def getInventory():
-    cursor.execute(f"SELECT * FROM INVENTORY")
-    return cursor.fetchall()
+    cur.execute(f"SELECT * FROM INVENTORY")
+    return cur.fetchall()
 
 class App(ctk.CTk):
     def __init__(self):
