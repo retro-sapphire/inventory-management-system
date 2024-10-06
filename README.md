@@ -39,17 +39,9 @@ When developing/testing, use this to run as a normal Python program
 python3 init.py
 ```
 
-To compile as a .exe file for windows, run
-
-```bash
-python3 setup.py
-```
-
-A `init.exe` will be made in `dist` folder. Execute it to run the program.
-
 # Setup for the sample database
 Open the mysql command line and run the following command to quickly set up a sample database.
 
-```sql
-source sample_db.sql
+```mysql
+source sample_db.sql;
 ```
