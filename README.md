@@ -4,7 +4,7 @@ This program is only supported on Windows.
 
 Make sure you have the following installed:
 - [Python 3.12](https://www.python.org/downloads/)
-- [MySQL 8.4.0](https://dev.mysql.com/downloads/mysql/)
+- [MySQL 9.0.0](https://dev.mysql.com/downloads/mysql/)
 - [GIT](https://www.git-scm.com/download/)
 
 Now do this before running the program:
