@@ -3,68 +3,44 @@ import customtkinter as ctk
 import mysql.connector as con
 from dotenv import load_dotenv
 import os
+from PIL import Image, ImageTk
 
 # App modules
-from modules.sidebar import Sidebar
-from modules.inventory import InventoryFrame
-from modules.orders import OrdersFrame
+from app import App
 
-load_dotenv(override=True)
-
-cnx = con.connect(
-    host=os.getenv("DB_DOMAIN"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASS"),
-    db=os.getenv("DB_NAME")
-)
-cur = cnx.cursor()
-
-
-class App(ctk.CTk):
+class Index(ctk.CTk):
     def __init__(self):
         super().__init__()
 
         self.title("Grocery Management System")
         self.geometry("1200x800")
         self.rowconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+        images_path = "images/pngs"
+        self.logoImg = ctk.CTkImage(dark_image=Image.open(os.path.join(images_path, "logo.png")), size=(512,512))
+        self.logoLbl = ctk.CTkLabel(self, image=self.logoImg, text=None)
+        self.logoLbl.grid(row=0, column=0, sticky="n", pady=(150, 0))
+        self.nameLbl = ctk.CTkLabel(self, text="Rishab Arora XII B", font=('Segoe UI', 20))
+        self.nameLbl.grid(row=1, column=0, sticky="nsew", pady=(50, 0))
+        self.loginBtn = ctk.CTkButton(self, text="Login",
+                                       corner_radius=0, height=50, width=150, border_spacing=10,
+                                       anchor="c", command=self.login,
+                                       font=("Segoe UI", 15)
+                                        )
+        self.loginBtn.grid(row=2, column=0, sticky='n', padx=10, pady=10)
+        
+        self.app = App(self)  
 
-        self.sidebar = Sidebar(self, self.inventory_fn, self.orders_fn)
-        self.sidebar.grid(row=0, column=0, sticky="nsw")
-        self.sidebar.configure(fg_color="transparent")
-
-        self.inventory = InventoryFrame(self, cnx, cur)
-        self.orders = OrdersFrame(self, cnx, cur)
-
-        self.switch_frames("inventory")
-
-    def switch_frames(self, name):
-        self.sidebar.inventoryBtn.configure(fg_color=("gray75", "gray25") if name == "inventory" else "transparent")
-        self.sidebar.ordersBtn.configure(fg_color=("gray75", "gray25") if name == "orders" else "transparent")
-
-        if name == "inventory":
-            self.inventory.grid(row=0, column=1, sticky="nsew")
-        else:
-            self.inventory.grid_forget()
-
-        if name == "orders":
-            self.orders.grid(row=0, column=1, sticky="nsew")
-        else:
-            self.orders.grid_forget()
-
-    def inventory_fn(self):
-        self.switch_frames("inventory")
-
-    def orders_fn(self):
-        self.switch_frames("orders")
+    def login(self):
+        self.logoLbl.grid_forget()
+        self.loginBtn.grid_forget()
+        self.app.grid(row=0, column=0, sticky="nsew")
 
 def main():
     # Styles
     ctk.set_appearance_mode('dark')
     ctk.set_default_color_theme('green')
-
-    # Run the app
-    root = App()
+    root = Index()
     root.mainloop()
 
 

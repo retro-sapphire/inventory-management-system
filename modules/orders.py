@@ -84,6 +84,6 @@ class OrdersFrame(ctk.CTkFrame):
         self.insert_order(user_id)
 
         self.cur.execute(f"SELECT orderId FROM ORDERS WHERE userId = {user_id}")
-        order_id = self.cur.fetchall()[0][0]
+        order_id = self.cur.fetchall()[-1][0]
 
         self.insert_order_products(order_id)

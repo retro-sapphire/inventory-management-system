@@ -1,13 +1,11 @@
 from tkinter import ttk
 
-
 class Table(ttk.Treeview):
     def __init__(self, master, columns):
         super().__init__(master, columns=columns,
                          height=17,
                          selectmode='browse',
                          show='headings')
-
         style = ttk.Style()
         style.theme_use('default')
         style.configure('Treeview',
@@ -26,7 +24,4 @@ class Table(ttk.Treeview):
                         font=("Segoe UI", 16))
         style.map("Treeview.Heading",
                   background=[('active', '#3484F0')])
-
-
-
         self.bind('<Motion>', 'break')

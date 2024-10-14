@@ -1,3 +1,6 @@
+CREATE DATABASE inventory_system;
+use inventory_system;
+
 -- Create USERS table
 CREATE TABLE USERS
 (
